@@ -2,6 +2,7 @@
 <a name="security"></a>
 ## Security
 
+{{#hasNonOAuthSecurity openapi.components.securitySchemes}}
 <table class="table">
   <thead class="table__head">
     <tr class="table__head__row">
@@ -27,4 +28,9 @@
 
   </tbody>
 </table>
+{{/hasNonOAuthSecurity}}
+
+{{#hasOAuth2Flows openapi.components.securitySchemes}}
+{{> securityOAuth2Flows schemes=.}}
+{{/hasOAuth2Flows}}
 {{/if}}

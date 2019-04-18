@@ -1,0 +1,38 @@
+<a id="sec_oauth_flows" />
+
+### OAuth2 Security Flows
+
+<table>
+<tr>
+<th>Name</th>
+<th>Grant Type</th>
+<th>URLs</th>
+<th>Scopes</th>
+</tr>
+{{#each . as |security securityName|}}
+{{#equal security.type 'oauth2'}}
+{{#each security.flows as |flow flowType|}}
+<tr>
+<td>{{securityName~}}</td>
+<td>{{flowType~}}</td>
+<td><dl>{{#if flow.tokenUrl}}<dt>Token URL</dt>
+    <dd>{{flow.tokenUrl}}</dd>{{/if}}{{#if flow.authorizationUrl}}
+<dt>Authorization URL</dt>
+    <dd>{{flow.authorizationUrl}}</dd>{{/if}}{{#if flow.refreshUrl}}
+<dt>Refresh URL</dt>
+    <dd>{{flow.refreshUrl}}</dd>{{/if}}
+</dl>
+</td>
+<td>
+<dl>
+{{#each scopes as |scope|}}
+<dt>{{@key}}</dt>
+<dd>{{scope}}</dd>
+{{/each}}
+</dl>
+</td>
+</tr>
+{{/each}}
+{{/equal}}
+{{/each}}
+</table>

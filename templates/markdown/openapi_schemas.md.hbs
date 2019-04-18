@@ -1,0 +1,7 @@
+# {{openapi.info.title}} Document Types
+
+{{#each openapi.components.schemas as |schema schemaName|}}
+- [{{schema.title}}](#{{schema.slug}})
+{{/each}}
+
+{{> schemas }}

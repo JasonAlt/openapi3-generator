@@ -1,0 +1,106 @@
+# {{tag.name}} API
+
+## Overview
+
+{{{tag.description}}}
+
+## {{tag.name}} API Overview
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>API Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+{{#each @root.openapi.paths as |path pathName|~}}
+{{#each (filterPathByTag path ../tag.name) as |op opName|}}
+{{#validMethod opName}}
+<tr>
+<td><code>{{uppercase opName}}</code></td>
+<td><a href="#{{op.operationId}}">{{pathName}}</a></td>
+<td>{{op.summary}}</td>
+</tr>
+{{/validMethod}}
+{{~/each}}
+{{~/each}}
+</table>
+
+### Common Path Parameters
+
+{{#pathParamsByTag @root.openapi.paths tag.name 'path'}}
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+{{#each this as |pathParam|}}
+{{> paramProp prop=pathParam propName=pathParam.name required=(isRequired ../schema @key) path=''}}
+{{/each}}
+</tbody>
+</table>
+{{else}}
+No path parameters.
+{{/pathParamsByTag}}
+
+### Common Query Parameters
+
+{{#pathParamsByTag @root.openapi.paths tag.name 'query'}}
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+{{#each this as |pathParam|}}
+{{> paramProp prop=pathParam propName=pathParam.name required=(isRequired ../schema @key) path=''}}
+{{/each}}
+</tbody>
+</table>
+{{else}}
+No query parameters.
+{{/pathParamsByTag}}
+
+### Common Header Parameters
+
+{{#pathParamsByTag @root.openapi.paths tag.name 'header'}}
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+{{#each this as |pathParam|}}
+{{> paramProp prop=pathParam propName=pathParam.name required=(isRequired ../schema @key) path=''}}
+{{/each}}
+</tbody>
+</table>
+{{else}}
+No header parameters.
+{{/pathParamsByTag}}
+
+## {{tag.name}} API Operations
+
+{{#each @root.openapi.paths as |path pathName|~}}
+{{#each (filterPathByTag path ../tag.name) as |op opName|}}
+
+{{#validMethod opName}}
+<a id="{{op.operationId}}" />
+
+### {{op.summary}}
+
+{{> operation operation=op path=path pathName=pathName opName=opName}}
+{{/validMethod}}
+{{/each}}
+{{/each}}

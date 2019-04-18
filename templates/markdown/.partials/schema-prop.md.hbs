@@ -1,26 +1,37 @@
+{{#if prop.allOf}}
+{{#each prop.allOf as |allProps|}}
+{{~#if @first}}
+{{#each allProps.properties as |subprop subpropName|}}
+{{> schemaProp prop=subprop propName=subpropName required=(isRequired ../schema @key) path='' omitReadOnly=../omitReadOnly}}
+{{/each}}
+{{/if}}
+{{/each}}
+{{else}}
+{{#filterReadOnly prop omitReadOnly~}}
 <tr>
-  <td>{{#if prop.deprecated}}<s>{{tree path}}{{propName}}</s> (deprecated){{else}}{{tree path}}{{propName}}{{/if}}{{#if required}} <strong>(required)</strong>{{/if}}</td>
+  <td>{{#if ../prop.deprecated}}<s>{{tree ../path}}{{../propName}}</s> (deprecated){{else}}{{tree path}}{{../propName}}{{/if}}{{#if required}} <strong>(required)</strong>{{/if}}</td>
   <td>
-    {{prop.type}}
-    {{~#if prop.anyOf}}anyOf{{~/if}}
-    {{~#if prop.oneOf}}oneOf{{~/if}}
-    {{~#if prop.items.type}}({{prop.items.type}}){{~/if}}
+    {{~#unless ../prop.title}}{{~../prop.type}} {{#if ../prop.format}}<em>&lt;{{../prop.format}}&gt;</em>{{/if}}{{/unless}}
+    {{~#if ../prop.title}}
+    <a href="openapi_schemas.md#{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.title}}{{~s.slug}}{{/equal}}{{/each}}">{{../prop.title}}</a>{{/if}}
+    {{~#if ../prop.anyOf}}anyOf{{~/if}}
+    {{~#if ../prop.oneOf}}One of {
+    {{#each ../prop.oneOf as |choice|}}
+    {{~#each @root.openapi.components.schemas as |schema schemaName|}}
+    {{#equal schema.title choice.title~}}
+    <a href="openapi_schemas.md#{{schema.slug}}">{{/equal}}{{/each}}{{choice.title}}</a>{{#unless @last}}, {{/unless}}
+    {{~/each}}
+    }
+    {{~/if}}
+    {{~#if ../prop.pattern}}<code>{{../prop.pattern}}</code>{{/if}}
+    {{~#if ../prop.items.type}}({{../prop.items.type}}){{~/if}}
+    {{~#if ../prop.items.title}}(<a href="openapi_schemas.md#{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.items.title}}{{~s.slug}}{{/equal}}{{/each}}">{{../prop.items.title}}</a>){{~/if}}
+    {{~#if ../prop.enum}}<br />{{{acceptedValues ../prop.enum}}}{{/if}}
   </td>
-  <td>{{{prop.descriptionAsHTML}}}</td>
-  <td>{{{acceptedValues prop.enum}}}</td>
+  <td>{{{../prop.description}}}{{~#if ../prop.oneOf}}
+  {{~#if ../prop.discriminator}}
+  Type selected by {{../prop.discriminator.propertyName}}{{/if}}{{/if}}
+  {{~#equal ../prop.x-private true}}<b>[Private]</b>{{/equal}}</td>
 </tr>
-{{#each prop.anyOf}}
-{{> schemaProp prop=. propName=@key path=(buildPath ../propName ../path @key)}}
-{{/each}}
-{{#each prop.oneOf}}
-  {{> schemaProp prop=. propName=@key path=(buildPath ../propName ../path @key)}}
-{{/each}}
-{{#each prop.properties}}
-{{> schemaProp prop=. propName=@key required=(isRequired ../prop @key) path=(buildPath ../propName ../path @key)}}
-{{/each}}
-{{#each prop.additionalProperties.properties}}
-{{> schemaProp prop=. propName=@key required=(isRequired ../prop.additionalProperties @key) path=(buildPath ../propName ../path @key)}}
-{{/each}}
-{{#each prop.items.properties}}
-{{> schemaProp prop=. propName=@key required=(isRequired ../prop.items @key) path=(buildPath ../propName ../path @key)}}
-{{/each}}
+{{~/filterReadOnly}}
+{{/if}}

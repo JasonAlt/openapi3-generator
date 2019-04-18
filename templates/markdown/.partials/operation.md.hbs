@@ -1,9 +1,9 @@
 <a id="{{operation.slug}}" />
 
-{{#if operation.summary}}
-> {{{operation.summary}}}
-
+{{#if opName}}
+`{{uppercase opName}} {{pathName}}`
 {{/if}}
+
 {{#if operation.description}}
 {{{operation.description}}}
 {{/if}}
@@ -32,7 +32,7 @@
 #### Request body
 {{#each operation.requestBody.content as |contentType contentTypeName| }}
 ###### {{contentTypeName}}
-{{> schema schema=schema schemaName='body' hideTitle=true hideExamples=true}}
+{{> schema schema=schema schemaName='body' hideTitle=true hideExamples=true omitReadOnly=true}}
 
 {{#if examples}}
 {{#each examples as |example exampleName|}}
@@ -72,12 +72,6 @@
 {{#if operation.responses}}
 #### Responses
 
-{{> responses responses=operation.responses hideTitle=true}}
-{{/if}}
-
-{{#if operation.tags}}
-#### Tags
-
-{{> tags tags=operation.tags}}
+{{> responses responses=operation.responses hideTitle=true hideErrors=true}}
 {{/if}}
 </div>

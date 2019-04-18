@@ -1,0 +1,12 @@
+# Responses
+
+{{#each openapi.components.responses as |response responseName|}}
+{{#if response.x-responseId}}
+
+<a name="{{response.x-responseId}}" />
+
+##  {{{response.description}}}
+
+{{~> response response=response responseName=responseName hideTitle=true ~}}
+{{/if}}
+{{/each}}

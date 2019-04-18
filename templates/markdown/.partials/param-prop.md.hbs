@@ -2,17 +2,17 @@
   <td>{{tree path}}{{propName}} {{#if prop.required}} <strong>(required)</strong>{{/if}}</td>
   <td>
     {{#if prop.schema}}
-    {{prop.schema.type}}
+    {{~prop.schema.type}}
     {{~#if prop.schema.anyOf}}anyOf{{~/if}}
     {{~#if prop.schema.oneOf}}oneOf{{~/if}}
     {{~#if prop.schema.items.type}}({{prop.schema.items.type}}){{~/if}}
-    {{else}}
+    {{~#if prop.schema.items.enum}}[{{{acceptedValues prop.schema.items.enum}}}]
+    {{~else}}{{{acceptedValues prop.schema.enum}}}{{~/if}}
+    {{~else}}
     unknown
     {{/if}}
   </td>
-  <td>{{prop.in}}</td>
-  <td>{{{prop.descriptionAsHTML}}}</td>
-  <td>{{{acceptedValues prop.schema.enum}}}</td>
+  <td>{{{prop.description}}}</td>
 </tr>
 {{#each prop.anyOf}}
 {{> paramProp prop=. propName=@key path=(buildPath ../propName ../path @key)}}

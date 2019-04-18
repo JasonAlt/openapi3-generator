@@ -3,9 +3,11 @@
 {{/unless}}
 
 {{#each responses as |response responseCode|}}
-{{#if responseCode}}
-##### ▶ {{responseCode}} {{#if response.description}}- {{{response.description}}}{{/if}}
-{{/if}}
+{{#if response.x-responseId}}
+##### [{{responseCode}} {{#if response.description}}- {{{response.description}}}{{/if}}](openapi_responses.md#{{response.x-responseId}})
+{{else}}
+#####  {{responseCode}} {{#if response.description}}- {{{response.description}}}{{/if}}
 
 {{~> response response=response responseName=responseCode hideTitle=true ~}}
+{{/if}}
 {{/each}}

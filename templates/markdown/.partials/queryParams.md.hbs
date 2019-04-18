@@ -1,14 +1,20 @@
-#### Query parameters
+#### Query Parameters
 
-{{#each queryParams as |queryParam|}}
-{{#if queryParam.name}}
-##### &#9655; {{queryParam.name}}
-{{/if}}
-
-{{#if queryParam.description}}
-{{{queryParam.description}}}
-{{/if}}
-
-{{> parameter param=queryParam paramName=queryParam.name hideTitle=true}}
-
+{{#if queryParams}}
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+{{#each queryParams as |opParam|}}
+{{> paramProp prop=opParam propName=opParam.name required=(isRequired ../schema @key) path=''}}
 {{/each}}
+</tbody>
+</table>
+{{else}}
+No query parameters.
+{{/if}}
