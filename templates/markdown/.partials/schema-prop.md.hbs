@@ -1,12 +1,3 @@
-{{#if prop.allOf}}
-{{#each prop.allOf as |allProps|}}
-{{~#if @first}}
-{{#each allProps.properties as |subprop subpropName|}}
-{{> schemaProp prop=subprop propName=subpropName required=(isRequired ../schema @key) path='' omitReadOnly=../omitReadOnly}}
-{{/each}}
-{{/if}}
-{{/each}}
-{{else}}
 {{#filterReadOnly prop omitReadOnly~}}
 <tr>
   <td>{{#if ../prop.deprecated}}<s>{{tree ../path}}{{../propName}}</s> (deprecated){{else}}{{tree path}}{{../propName}}{{/if}}{{#if required}} <strong>(required)</strong>{{/if}}</td>
@@ -34,4 +25,3 @@
   {{~#equal ../prop.x-private true}}<b>[Private]</b>{{/equal}}</td>
 </tr>
 {{~/filterReadOnly}}
-{{/if}}
