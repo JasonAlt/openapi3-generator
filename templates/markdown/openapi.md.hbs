@@ -1,4 +1,26 @@
 [//]: # "Created automatically by openapi3-generator"
+<table>
+<tr>
+<td width="160px" valign="top">
+<ul>
+{{#if openapi.components.securitySchemes}}
+<li><a href="openapi_security.md">Authorization</a></li>
+{{/if}}
+{{#if openapi.tags}}
+{{#each openapi.tags as |tag|}}
+<li><a href="openapi_{{tagify tag.name}}.md">{{tag.name}}</a></li>
+{{/each}}
+{{/if}}
+{{#if openapi.components.schemas}}
+<li><a href="openapi_schemas.md">Document Types</a></li>
+{{/if}}
+{{#if openapi.components.responses}}
+<li><a href="openapi_responses.md">Response Types</a></li>
+{{/if}}
+</ul>
+</td>
+<td>
+
 # {{openapi.info.title}}
 {{{openapi.info.description}}}
 
@@ -18,3 +40,6 @@
 {{#if openapi.components.responses}}
 * [Response Types](openapi_responses.md)
 {{/if}}
+</td>
+</tr>
+</table>
