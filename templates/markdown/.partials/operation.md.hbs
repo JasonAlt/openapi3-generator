@@ -1,4 +1,4 @@
-<a id="{{operation.slug}}" />
+<a id="{{operation.slug}}"></a>
 
 {{#if opName}}
 `{{uppercase opName}} {{pathName}}`
@@ -6,6 +6,11 @@
 
 {{#if operation.description}}
 {{{operation.description}}}
+{{/if}}
+
+{{#if operation.x-authorizers}}
+### Authorization
+{{> authorizer authorizers=operation.x-authorizers}}
 {{/if}}
 
 {{#if operation.curl}}

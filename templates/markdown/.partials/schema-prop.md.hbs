@@ -2,11 +2,11 @@
 <tr>
   <td>{{#if ../prop.deprecated}}<s>{{tree ../path}}{{../propName}}</s> (deprecated){{else}}{{tree path}}{{../propName}}{{/if}}{{#if required}} <strong>(required)</strong>{{/if}}</td>
   <td>
-    {{~#unless ../prop.title}}{{~../prop.type}} {{#if ../prop.format}}<em>&lt;{{../prop.format}}&gt;</em>{{/if}}{{/unless}}
+    {{~#unless ../prop.title}}{{~../prop.type}}{{#if ../prop.format}} <em>&lt;{{../prop.format}}&gt;</em>{{/if}}{{/unless}}
     {{~#if ../prop.title}}
     <a href="openapi_schemas.md#{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.title}}{{~s.slug}}{{/equal}}{{/each}}">{{../prop.title}}</a>{{/if}}
-    {{~#if ../prop.anyOf}}anyOf{{~/if}}
-    {{~#if ../prop.oneOf}}One of {
+    {{~#if ../prop.anyOf}} anyOf{{~/if}}
+    {{~#if ../prop.oneOf}} One of {
     {{#each ../prop.oneOf as |choice|}}
     {{~#each @root.openapi.components.schemas as |schema schemaName|}}
     {{#equal schema.title choice.title~}}
@@ -14,10 +14,10 @@
     {{~/each}}
     }
     {{~/if}}
-    {{~#if ../prop.pattern}}<code>{{../prop.pattern}}</code>{{/if}}
-    {{~#if ../prop.items.type}}({{../prop.items.type}}){{~/if}}
-    {{~#if ../prop.items.title}}(<a href="openapi_schemas.md#{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.items.title}}{{~s.slug}}{{/equal}}{{/each}}">{{../prop.items.title}}</a>){{~/if}}
-    {{~#if ../prop.enum}}<br />{{{acceptedValues ../prop.enum}}}{{/if}}
+    {{~#if ../prop.pattern}} <code>{{../prop.pattern}}</code>{{/if}}
+    {{~#if ../prop.items.type}} ({{../prop.items.type}}){{~/if}}
+    {{~#if ../prop.items.title}} (<a href="openapi_schemas.md#{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.items.title}}{{~s.slug}}{{/equal}}{{/each}}">{{../prop.items.title}}</a>){{~/if}}
+    {{~#if ../prop.enum}} <br>{{{acceptedValues ../prop.enum}}}{{/if}}
   </td>
   <td>{{{../prop.description}}}{{~#if ../prop.oneOf}}
   {{~#if ../prop.discriminator}}
