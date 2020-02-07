@@ -8,6 +8,8 @@
     {{~#if ../prop.anyOf}} anyOf{{~/if}}
     {{~#if ../prop.oneOf}} One of {
     {{#each ../prop.oneOf as |choice|}}
+    {{~#equal choice.type "string"}}string{{/equal}}
+    {{~#equal choice.type "object"}}object{{/equal}}
     {{~#each @root.openapi.components.schemas as |schema schemaName|}}
     {{#equal schema.title choice.title~}}
     <a href="openapi_schemas.md#{{schema.slug}}">{{/equal}}{{/each}}{{choice.title}}</a>{{#unless @last}}, {{/unless}}
