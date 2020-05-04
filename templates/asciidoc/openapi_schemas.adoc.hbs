@@ -1,0 +1,19 @@
+// Created automatically by openapi3-generator
+ifdef::env-github,env-browser[:adoc: .adoc]
+ifndef::env-github,env-browser[:adoc: .html]
+:openapi_schemas_adoc:
+:toc: left
+
+= {{openapi.info.title}} Document Types
+
+ifdef::env-github,env-browser[]
+{{> schemas }}
+endif::[]
+
+ifndef::env-github,env-browser[]
+{{#each openapi.components.schemas as |schema schemaName|}}
+include::{{tagify schema.title}}_schema.adoc[]
+
+{{/each}}
+endif::[]
+

@@ -1,0 +1,69 @@
+{{#filterReadOnly prop omitReadOnly~}}
+|{{#if ../prop.deprecated}}{{tree ../path}}{{../propName}} __(deprecated)__{{else}}{{tree path}}{{../propName}}{{/if}}{{#if required}} **(required)**{{/if}}
+|
+{{~#unless ../prop.title}}{{~../prop.type}}{{#if ../prop.format}} __&lt;{{../prop.format}}&gt;__{{/if}}{{/unless}}
+{{~#if ../prop.title}}{{#unless ../prop.anyOf}}
+ifdef::combined-doc[]
+link:{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.title}}{openapi_schemas_adoc}#{{~s.slug}}{{/equal}}{{/each}}[{{../prop.title}}]
+endif::combined-doc[]
+ifndef::combined-doc[]
+link:{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.title}}{{tagify s.title}}_schema{adoc}#{{~s.slug}}{{/equal}}{{/each}}[{{../prop.title}}]
+endif::combined-doc[]
+{{/unless}}{{/if}}
+{{~#if ../prop.anyOf}} anyOf {
+    {{#each ../prop.anyOf as |choice|}}
+    {{~#equal choice.type "string"}}string{{/equal}}
+    {{~#equal choice.type "object"}}object{{/equal}}
+    {{~#if choice.format}} __&lt;{{choice.format}}&gt;__{{/if}}
+    {{~#if choice.enum}} {{{acceptedValues choice.enum}}}{{/if}}
+    {{~#each @root.openapi.components.schemas as |schema schemaName|}}
+    {{#equal schema.title choice.title}}
+
+ifdef::combined-doc[]
+link:{openapi_schemas_adoc}#{{schema.slug}}[{{choice.title}}]
+endif::combined-doc[]
+ifndef::combined-doc[]
+link:{{tagify schema.title}}_schema{adoc}#{{schema.slug}}[{{choice.title}}]
+endif::[]
+    {{/equal}}{{/each}}{{#unless @last}}, {{/unless}}
+    {{/each}}
+    }
+{{~/if}}
+{{~#if ../prop.oneOf}} One of {
+{{#each ../prop.oneOf as |choice|}}
+{{~#equal choice.type "string"}}string
+{{/equal}}
+{{~#equal choice.type "object"}}object
+{{/equal}}
+{{~#if choice.format}} __&lt;{{choice.format}}&gt;__{{/if}}
+{{~#if choice.enum}} {{{acceptedValues choice.enum}}}{{/if}}
+{{~#each @root.openapi.components.schemas as |schema schemaName|}}
+{{#equal schema.title choice.title}}
+ifdef::combined-doc[]
+link:{openapi_schemas_adoc}#{{schema.slug}}[{{choice.title}}]
+endif::combined-doc[]
+ifndef::combined-doc[]
+link:{{tagify choice.title}}_schema{adoc}#{{schema.slug}}[{{choice.title}}]
+endif::combined-doc[]
+{{/equal}}{{/each}}{{#unless @last}}, {{/unless}}
+{{~/each}}
+&#8203;
+}
+{{~/if}}
+{{~#if ../prop.pattern}} `{{{escapePattern ../prop.pattern}}}`{{/if}}
+{{~#if ../prop.items.type}} ({{../prop.items.type}}){{~/if}}
+{{~#if ../prop.items.title}} (
+ifdef::combined-doc[]
+link:{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.items.title}}{openapi_schemas_adoc}#{{~s.slug}}[{{/equal}}{{/each}}{{../prop.items.title}}]
+endif::combined-doc[]
+ifndef::combined-doc[]
+link:{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.items.title}}{{tagify s.title}}_schema{adoc}#{{~s.slug}}[{{/equal}}{{/each}}{{../prop.items.title}}]
+endif::combined-doc[]
+){{~/if}}
+{{~#if ../prop.enum}} {{{acceptedValues ../prop.enum}}}{{/if}}
+|{{{../prop.description}}}{{~#if ../prop.oneOf}}
+  {{~#if ../prop.discriminator}}
+  Type selected by {{../prop.discriminator.propertyName}}{{/if}}{{/if}}
+  {{~#equal ../prop.x-private true}}**[Private]**{{/equal}}
+{{~/filterReadOnly}}
+

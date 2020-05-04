@@ -1,0 +1,28 @@
+{{#unless hideTitle}}
+=== {{parameterName}}
+{{/unless}}
+
+[cols="1,2,1,4,1",options="header"]
+|===
+| Name | Type | In | Description | Accepted values
+    {{#each param.schema.properties}}
+      {{> paramProp prop=. propName=@key required=(isRequired ../schema @key) path=''}}
+    {{else}}
+      {{> paramProp prop=param propName=paramName required=(isRequired ../schema @key) path=''}}
+    {{/each}}
+|===
+
+{{#unless hideExamples}}
+{{#if schema.example}}
+[.accordionize]
+--
+.Example
+[%collapsible]
+====
+[source,json]
+----
+{{{stringify param.schema.example}}}
+----
+====
+--
+{{/unless}}

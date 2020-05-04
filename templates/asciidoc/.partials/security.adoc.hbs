@@ -1,0 +1,23 @@
+{{#if openapi.components.securitySchemes}}
+[[security]]
+== Security
+
+{{#hasNonOAuthSecurity openapi.components.securitySchemes}}
+[cols="1,1,1,1,1,4",options="header"]
+|===
+| Type | In | Name | Schema | Format | Description
+  {{#each openapi.components.securitySchemes as |security|}}
+  | {{security.type}}
+  | {{security.in}}
+  | {{security.name}}
+  | {{security.scheme}}
+  | {{security.bearerFormat}}
+  | {{{security.descriptionAsHTML}}}
+  {{/each}}
+|===
+{{/hasNonOAuthSecurity}}
+
+{{#hasOAuth2Flows openapi.components.securitySchemes}}
+{{> securityOAuth2Flows schemes=.}}
+{{/hasOAuth2Flows}}
+{{/if}}

@@ -1,0 +1,76 @@
+ifndef::combined-doc[]
+= {{tag.name}} API
+endif::combined-doc[]
+
+== Overview
+
+{{{tag.description}}}
+
+== {{tag.name}} API Summary
+
+[cols="1,2,4",options="header"]
+|===
+| Method | API Path | Description
+{{#each @root.openapi.paths as |path pathName|~}}
+{{#each (filterPathByTag path ../tag.name) as |op opName|}}
+{{#validMethod opName}}
+| `{{uppercase opName}}` | <<{{op.operationId}},{{pathName}}>> | {{op.summary}}
+{{/validMethod}}
+{{~/each}}
+{{~/each}}
+|===
+
+=== Common Path Parameters
+
+{{#pathParamsByTag @root.openapi.paths tag.name 'path'}}
+[cols="1,2,4",options="header"]
+|===
+| Parameter | Type | Description
+{{#each this as |pathParam|}}
+{{> paramProp prop=pathParam propName=pathParam.name required=(isRequired ../schema @key) path=''}}
+{{/each}}
+|===
+{{else}}
+No path parameters.
+{{/pathParamsByTag}}
+
+=== Common Query Parameters
+
+{{#pathParamsByTag @root.openapi.paths tag.name 'query'}}
+[cols="1,2,4",options="header"]
+|===
+| Parameter | Type | Description
+{{#each this as |pathParam|}}
+{{> paramProp prop=pathParam propName=pathParam.name required=(isRequired ../schema @key) path=''}}
+{{/each}}
+|===
+{{else}}
+No query parameters.
+{{/pathParamsByTag}}
+
+=== Common Header Parameters
+
+{{#pathParamsByTag @root.openapi.paths tag.name 'header'}}
+|===
+| Parameter | Type | Description
+{{#each this as |pathParam|}}
+{{> paramProp prop=pathParam propName=pathParam.name required=(isRequired ../schema @key) path=''}}
+{{/each}}
+|===
+{{else}}
+No header parameters.
+{{/pathParamsByTag}}
+
+== {{tag.name}} API Details
+
+{{#each @root.openapi.paths as |path pathName|~}}
+{{#each (filterPathByTag path ../tag.name) as |op opName|}}
+
+{{#validMethod opName}}
+[[{{op.operationId}}]]
+=== {{op.summary}}
+
+{{> operation operation=op path=path pathName=pathName opName=opName}}
+{{/validMethod}}
+{{/each}}
+{{/each}}

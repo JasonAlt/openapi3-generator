@@ -1,0 +1,15 @@
+==== Query Parameters
+
+{{#if queryParams}}
+[cols="1,2,4a",options="header"]
+|===
+| Parameter
+| Type
+| Description
+{{#each queryParams as |opParam|}}
+{{> paramProp prop=opParam propName=opParam.name required=(isRequired ../schema @key) path=''}}
+{{/each}}
+|===
+{{else}}
+No query parameters.
+{{/if}}

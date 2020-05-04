@@ -1,0 +1,20 @@
+// Created automatically by openapi3-generator
+ifdef::env-github,env-browser[:adoc: .adoc]
+ifndef::env-github,env-browser[:adoc: .html]
+ifndef::openapi_schemas_adoc[]
+:openapi_schemas_adoc: openapi_schemas{adoc}
+endif::[]
+:toc: left
+
+= Responses
+
+{{#each openapi.components.responses as |response responseName|}}
+{{#if response.x-responseId}}
+
+[[{{response.x-responseId}}]]
+
+== {{{response.description}}}
+
+{{~> response response=response responseName=responseName hideTitle=true ~}}
+{{/if}}
+{{/each}}

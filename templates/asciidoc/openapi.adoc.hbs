@@ -1,0 +1,49 @@
+// Created automatically by openapi3-generator
+ifdef::env-github,env-browser[:adoc: .adoc]
+ifndef::env-github,env-browser[:adoc: .html]
+:combined-doc:
+:openapi_schemas_adoc:
+:toc: left
+
+= {{openapi.info.title}}
+{{{openapi.info.description}}}
+
+ifdef::include-flows[]
+{{#if openapi.components.securitySchemes}}
+== Authorization
+{{> security}}
+{{/if}}
+endif::[]
+
+{{#if openapi.tags}}
+{{#each @root.openapi.tags as |tag|}}
+== {{tag.name}}
+:leveloffset: +1
+{{> pathsByTag tag=tag}}
+:leveloffset: -1
+{{/each}}
+{{/if}}
+
+{{#if openapi.components.schemas}}
+== Document Schemas
+{{> schemas }}
+{{/if}}
+
+{{#if openapi.components.responses}}
+== Responses
+
+{{#each openapi.components.responses as |response responseName|}}
+{{#if response.x-responseId}}
+
+[[{{response.x-responseId}}]]
+
+=== {{{response.description}}}
+
+:leveloffset: -2
+
+{{~> response response=response responseName=responseName hideTitle=true ~}}
+
+:leveloffset: +2
+{{/if}}
+{{/each}}
+{{/if}}

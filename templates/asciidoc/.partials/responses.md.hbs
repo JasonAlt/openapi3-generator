@@ -1,0 +1,13 @@
+{{#unless hideTitle}}
+==== Responses
+{{/unless}}
+
+{{#each responses as |response responseCode|}}
+{{#if response.x-responseId}}
+===== <<openapi_responses{adoc}#{{response.x-responseId}},{{responseCode}} {{#if response.description}}- {{{response.description}}}{{/if}}>>
+{{else}}
+=====  {{responseCode}} {{#if response.description}}- {{{response.description}}}{{/if}}
+
+{{~> response response=response responseName=responseCode hideTitle=true ~}}
+{{/if}}
+{{/each}}

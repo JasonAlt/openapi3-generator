@@ -1,0 +1,38 @@
+{{#if example}}
+.Example
+[%collapsible]
+====
+
+{{#if summary}}> {{{summary}}}{{/if}}
+
+{{#if description}}{{{description}}}{{/if}}
+
+[source,json]
+----
+{{{stringify example}}}
+----
+====
+{{else}}
+{{#if generatedExample}}
+.Example
+
+[%collapsible]
+====
+
+[source,json]
+----
+{{{stringify generatedExample}}}
+----
+====
+{{/if}}
+{{/if}}
+
+{{#if externalValue}}
+{{#unless example}}
+.Example
+[%collapsible]
+====
+{{/unless}}
+[Download example]({{externalValue}})
+====
+{{/if}}

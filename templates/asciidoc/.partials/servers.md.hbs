@@ -1,0 +1,13 @@
+{{#if openapi.servers}}
+[[servers]]
+== Servers
+
+[cols="1,4",options="header"]
+|===
+| URL | Description
+{{#each openapi.servers as |server|}}
+| <a href="{{server.url}}" target="_blank">{{server.url}}</a>
+| {{{server.description}}}
+{{/each}}
+|===
+{{/if}}

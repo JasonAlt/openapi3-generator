@@ -1,0 +1,26 @@
+[[sec_oauth_flows]]
+== OAuth2 Security Flows
+
+[cols="1,2,4a,4",options="header"]
+|===
+| Name | Grant Type | URLs | Scopes
+{{#each . as |security securityName|}}
+{{#equal security.type 'oauth2'}}
+{{#each security.flows as |flow flowType|}}
+| {{securityName~}}
+| {{flowType~}}
+| {{#if flow.tokenUrl}}Token URL::
+    {{flow.tokenUrl}}
+  {{/if}}{{#if flow.authorizationUrl}}Authorization URL::
+    {{flow.authorizationUrl}}
+  {{/if}}{{#if flow.refreshUrl}}Refresh URL::
+    {{flow.refreshUrl}}{{/if}}
+|
+{{#each scopes as |scope|}}
+{{@key}}::
+    {{scope}}
+{{/each}}
+{{/each}}
+{{/equal}}
+{{/each}}
+|===
