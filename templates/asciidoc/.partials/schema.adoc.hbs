@@ -1,11 +1,13 @@
 {{#if renderSlug}}[[{{schema.slug}}]]{{/if}}
-// tag::title[]
-{{#unless hideTitle}}{{#if schema.title}}== {{schema.title}} Document{{else}} == {{schemaName}} Document{{/if}}{{/unless}}
-// end::title[]
+{{#unless hideTitle}}// tag::title[]
+{{#if schema.title}}== {{schema.title}} Document{{else}} == {{schemaName}} Document{{/if}}
+// end::title[]{{/unless}}
 
+{{#if schema.description}}
 // tag::description[]
 {{{schema.description}}}
 // end::description[]
+{{/if}}
 
 // tag::properties[]
 [cols="1,2,4a",option="header"]
@@ -21,8 +23,8 @@
 |===
 // end::properties[]
 
-// tag::examples[]
 {{#unless hideExamples}}
+// tag::examples[]
 [.accordionize]
 --
 .Example {{#if schema.title}}{{schema.title}}{{else}}{{schemaName}}{{/if}}
@@ -40,5 +42,5 @@
 ----
 ====
 --
-{{/unless}}
 // end::examples[]
+{{/unless}}

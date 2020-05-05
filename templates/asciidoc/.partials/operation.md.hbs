@@ -39,8 +39,6 @@
 ===== {{contentTypeName}}
 {{> schema schema=schema schemaName='body' hideTitle=true hideExamples=true omitReadOnly=true}}
 
-[.accordionize]
---
 {{#if examples}}
 {{#each examples as |example exampleName|}}
 {{> example example=example.value description=example.description externalValue=example.externalValue}}
@@ -52,7 +50,6 @@
 {{> example example=schema.example generatedExample=schema.generatedExample }}
 {{/if}}
 {{/if}}
---
 
 {{/each}}
 {{/if}}

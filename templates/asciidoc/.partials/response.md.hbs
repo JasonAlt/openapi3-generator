@@ -39,8 +39,6 @@ _No headers specified_
 {{/each}}
 
 {{#if response.content}}
-[.accordionize]
---
 {{#each response.content as |content contentType|}}
 .{{contentType}}
 {{#if content.description}}
@@ -48,6 +46,8 @@ _No headers specified_
 {{/if}}
 {{> schema schema=content.schema schemaName='Response' hideTitle=true hideExamples=true}}
 
+[.accordionize]
+--
 {{#if content.schema.example}}
 .Example
 [%collapsible]

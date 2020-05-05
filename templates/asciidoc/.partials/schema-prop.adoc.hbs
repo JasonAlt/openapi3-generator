@@ -7,7 +7,7 @@ ifdef::combined-doc[]
 link:{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.title}}{openapi_schemas_adoc}#{{~s.slug}}{{/equal}}{{/each}}[{{../prop.title}}]
 endif::combined-doc[]
 ifndef::combined-doc[]
-link:{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.title}}{{tagify s.title}}_schema{adoc}#{{~s.slug}}{{/equal}}{{/each}}[{{../prop.title}}]
+link:{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.title}}{openapi_schemas_dir}/{{tagify s.title}}_schema{adoc}{{/equal}}{{/each}}[{{../prop.title}}]
 endif::combined-doc[]
 {{/unless}}{{/if}}
 {{~#if ../prop.anyOf}} anyOf {
@@ -23,7 +23,7 @@ ifdef::combined-doc[]
 link:{openapi_schemas_adoc}#{{schema.slug}}[{{choice.title}}]
 endif::combined-doc[]
 ifndef::combined-doc[]
-link:{{tagify schema.title}}_schema{adoc}#{{schema.slug}}[{{choice.title}}]
+link:{openapi_schemas_dir}/{{tagify schema.title}}_schema{adoc}[{{choice.title}}]
 endif::[]
     {{/equal}}{{/each}}{{#unless @last}}, {{/unless}}
     {{/each}}
@@ -43,7 +43,7 @@ ifdef::combined-doc[]
 link:{openapi_schemas_adoc}#{{schema.slug}}[{{choice.title}}]
 endif::combined-doc[]
 ifndef::combined-doc[]
-link:{{tagify choice.title}}_schema{adoc}#{{schema.slug}}[{{choice.title}}]
+link:{openapi_schemas_dir}/{{tagify choice.title}}_schema{adoc}[{{choice.title}}]
 endif::combined-doc[]
 {{/equal}}{{/each}}{{#unless @last}}, {{/unless}}
 {{~/each}}
@@ -57,7 +57,7 @@ ifdef::combined-doc[]
 link:{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.items.title}}{openapi_schemas_adoc}#{{~s.slug}}[{{/equal}}{{/each}}{{../prop.items.title}}]
 endif::combined-doc[]
 ifndef::combined-doc[]
-link:{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.items.title}}{{tagify s.title}}_schema{adoc}#{{~s.slug}}[{{/equal}}{{/each}}{{../prop.items.title}}]
+link:{{#each @root.openapi.components.schemas as |s sn|}}{{~#equal sn ../../prop.items.title}}{openapi_schemas_dir}/{{tagify s.title}}_schema{adoc}[{{/equal}}{{/each}}{{../prop.items.title}}]
 endif::combined-doc[]
 ){{~/if}}
 {{~#if ../prop.enum}} {{{acceptedValues ../prop.enum}}}{{/if}}

@@ -1,0 +1,32 @@
+// Created automatically by openapi3-generator
+ifdef::env-github,env-browser[]
+:adoc: .adoc
+ifndef::openapi_schemas_dir[]
+:openapi_schemas_dir: pass:[.]
+endif::[]
+endif::[]
+
+ifndef::env-github,env-browser[]
+:adoc: /
+ifndef::openapi_schemas_dir[]
+:openapi_schemas_dir: pass:[.]
+endif::[]
+endif::[]
+
+:combined-doc:
+:openapi_schemas_adoc:
+
+= {{openapi.info.title}}
+{{{openapi.info.description}}}
+
+{{#if openapi.tags}}
+{{#each @root.openapi.tags as |tag|}}
+* link:{openapi_schemas_dir}/openapi_{{tagify tag.name}}{adoc}[{{tag.name}}]
+{{/each}}
+{{/if}}
+{{#if openapi.components.schemas}}
+* link:{openapi_schemas_dir}/openapi_schemas{adoc}[Document Schemas]
+{{/if}}
+{{#if openapi.components.responses}}
+* link:{openapi_schemas_dir}/openapi_responses{adoc}[Responses]
+{{/if}}

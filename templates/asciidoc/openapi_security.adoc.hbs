@@ -4,7 +4,9 @@ ifndef::env-github,env-browser[:adoc: .html]
 ifndef::openapi_schemas_adoc[]
 :openapi_schemas_adoc: openapi_schemas{adoc}
 endif::[]
-:toc: left
+ifndef::openapi_schemas_dir[]
+:openapi_schemas_dir: .
+endif::[]
 
 = API Authorization Methods
 

@@ -4,7 +4,7 @@
 
 {{#each responses as |response responseCode|}}
 {{#if response.x-responseId}}
-===== <<openapi_responses{adoc}#{{response.x-responseId}},{{responseCode}} {{#if response.description}}- {{{response.description}}}{{/if}}>>
+===== link:{openapi_schemas_dir}/openapi_responses{adoc}#{{response.x-responseId}}[{{responseCode}} {{#if response.description}}- {{{response.description}}}{{/if}}]
 {{else}}
 =====  {{responseCode}} {{#if response.description}}- {{{response.description}}}{{/if}}
 

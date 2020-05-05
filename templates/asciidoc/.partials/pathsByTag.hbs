@@ -1,12 +1,12 @@
 ifndef::combined-doc[]
-= {{tag.name}} API
+= {{tag.name}}
 endif::combined-doc[]
 
-== Overview
+== {{tag.name}}
 
 {{{tag.description}}}
 
-== {{tag.name}} API Summary
+== {{tag.name}} Overview
 
 [cols="1,2,4",options="header"]
 |===
@@ -14,7 +14,7 @@ endif::combined-doc[]
 {{#each @root.openapi.paths as |path pathName|~}}
 {{#each (filterPathByTag path ../tag.name) as |op opName|}}
 {{#validMethod opName}}
-| `{{uppercase opName}}` | <<{{op.operationId}},{{pathName}}>> | {{op.summary}}
+| `{{uppercase opName}}` | link:#{{op.operationId}}[{{{breakAtSlash pathName}}}] | {{op.summary}}
 {{/validMethod}}
 {{~/each}}
 {{~/each}}
