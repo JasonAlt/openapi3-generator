@@ -2,6 +2,7 @@
 ==== {{responseName}}
 {{/unless}}
 
+{{#if response.headers}}
 ====== Headers
 {{#each response.headers as |header headerName|}}
 ===== {{headerName}}
@@ -33,10 +34,8 @@
 ----
 {{/if}}
 {{/if}}
-
-{{else}}
-_No headers specified_
 {{/each}}
+{{/if}}
 
 {{#if response.content}}
 {{#each response.content as |content contentType|}}

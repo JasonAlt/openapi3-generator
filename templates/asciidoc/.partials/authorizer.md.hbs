@@ -1,23 +1,26 @@
 {{#each authorizers as |authorizer|}}
 {{#if authorizer.RoleAuthorizer}}
-* RoleAuthorizer:
+* RoleAuthorizer: [
 {{#each authorizer.RoleAuthorizer as |name|}}
-  ** {{name}}
+{{name}}{{#unless @last}}, {{/unless}}
 {{/each}}
+]
 {{/if}}
 {{#equal authorizer 'PublicAuthorizer'}}
 * PublicAuthorizer
 {{/equal}}
 {{#if authorizer.CollectionAclAuthorizer}}
-* CollectionACLAuthorizer:
+* CollectionACLAuthorizer: [
 {{#each authorizer.CollectionAclAuthorizer as |name|}}
-  ** `{{name}}`
+`{{name}}`{{#unless @last}}, {{/unless}}
 {{/each}}
+]
 {{/if}}
 {{#if authorizer.StorageGatewayAuthorizer}}
-* StorageGatewayAuthorizer
+* StorageGatewayAuthorizer [
 {{#each authorizer.StorageGatewayAuthorizer as |name|}}
-  ** `{{name}}`
+`{{name}}`{{#unless @last}}, {{/unless}}
 {{/each}}
+]
 {{/if}}
 {{/each}}

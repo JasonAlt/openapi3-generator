@@ -20,9 +20,9 @@ endif::combined-doc[]
 {{~/each}}
 |===
 
+{{#pathParamsByTag @root.openapi.paths tag.name 'path'}}
 === Common Path Parameters
 
-{{#pathParamsByTag @root.openapi.paths tag.name 'path'}}
 [cols="1,2,4",options="header"]
 |===
 | Parameter | Type | Description
@@ -30,13 +30,11 @@ endif::combined-doc[]
 {{> paramProp prop=pathParam propName=pathParam.name required=(isRequired ../schema @key) path=''}}
 {{/each}}
 |===
-{{else}}
-No path parameters.
 {{/pathParamsByTag}}
-
-=== Common Query Parameters
 
 {{#pathParamsByTag @root.openapi.paths tag.name 'query'}}
+=== Common Query Parameters
+
 [cols="1,2,4",options="header"]
 |===
 | Parameter | Type | Description
@@ -44,24 +42,20 @@ No path parameters.
 {{> paramProp prop=pathParam propName=pathParam.name required=(isRequired ../schema @key) path=''}}
 {{/each}}
 |===
-{{else}}
-No query parameters.
 {{/pathParamsByTag}}
 
+{{#pathParamsByTag @root.openapi.paths tag.name 'header'}}
 === Common Header Parameters
 
-{{#pathParamsByTag @root.openapi.paths tag.name 'header'}}
 |===
 | Parameter | Type | Description
 {{#each this as |pathParam|}}
 {{> paramProp prop=pathParam propName=pathParam.name required=(isRequired ../schema @key) path=''}}
 {{/each}}
 |===
-{{else}}
-No header parameters.
 {{/pathParamsByTag}}
 
-== {{tag.name}} API Details
+== {{tag.name}} Details
 
 {{#each @root.openapi.paths as |path pathName|~}}
 {{#each (filterPathByTag path ../tag.name) as |op opName|}}

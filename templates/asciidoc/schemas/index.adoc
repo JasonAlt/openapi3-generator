@@ -1,0 +1,28 @@
+---
+short_title: Schemas
+menu_hide: true
+---
+
+{{#if openapi.components.schemas}}
+= {{openapi.info.title}} Schemas
+ifdef::env-github,env-browser[]
+:adoc: .adoc
+ifndef::openapi_schemas_dir[]
+:openapi_schemas_dir: pass:[.]
+endif::[]
+endif::[]
+ifndef::env-github,env-browser[]
+:adoc: /
+ifndef::openapi_schemas_dir[]
+:openapi_schemas_dir: pass:[..]
+endif::[]
+endif::[]
+
+This section of the document contains a reference to the different data types
+used in this API.
+
+ifdef::env-github,env-browser[]
+{{#each openapi.components.schemas}}
+* link:{openapi_schemas_dir}/{{tagify ./title}}_schema{adoc}[{{@key}}]
+{{/each}}
+{{/if}}
