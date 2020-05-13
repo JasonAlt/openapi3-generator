@@ -10,10 +10,10 @@
 | {{securityName~}}
 | {{flowType~}}
 | {{#if flow.tokenUrl}}Token URL::
-    {{flow.tokenUrl}}
-  {{/if}}{{#if flow.authorizationUrl}}Authorization URL::
-    {{flow.authorizationUrl}}
-  {{/if}}{{#if flow.refreshUrl}}Refresh URL::
+    {{flow.tokenUrl}}{{/if}}{{#if flow.authorizationUrl}}
+  Authorization URL::
+    {{flow.authorizationUrl}}{{/if}}{{#if flow.refreshUrl}}
+  Refresh URL::
     {{flow.refreshUrl}}{{/if}}
 |
 {{#each scopes as |scope|}}

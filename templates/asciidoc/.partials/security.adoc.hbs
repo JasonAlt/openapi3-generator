@@ -7,12 +7,12 @@
 |===
 | Type | In | Name | Schema | Format | Description
   {{#each openapi.components.securitySchemes as |security|}}
-  | {{security.type}}
-  | {{security.in}}
-  | {{security.name}}
-  | {{security.scheme}}
-  | {{security.bearerFormat}}
-  | {{{security.descriptionAsHTML}}}
+  |{{security.type}}
+  |{{security.in}}
+  |{{security.name}}
+  |{{security.scheme}}
+  |{{security.bearerFormat}}
+  |{{{security.descriptionAsHTML}}}
   {{/each}}
 |===
 {{/hasNonOAuthSecurity}}

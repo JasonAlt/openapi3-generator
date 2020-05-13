@@ -1,6 +1,7 @@
+{{#each @root.openapi.tags as |t|}}{{#equal t.name ../tag_name}}{{#if t.x-menu-weight}}---
+menu_weight: {{t.x-menu-weight}}
 ---
-menu_weight: {{#each @root.openapi.tags as |t|}}{{#equal t.name ../tag_name}}{{t.x-menu-weight}}{{/equal}}{{/each}}
----
+{{/if}}{{/equal}}{{/each}}
 // Created automatically by openapi3-generator
 ifdef::env-github,env-browser[]
 :adoc: .adoc
