@@ -6,19 +6,23 @@ endif::combined-doc[]
 
 {{{tag.description}}}
 
+{{#each @root.openapi.paths as |path pathName|~}}
+{{#each (filterPathByTag path ../tag.name) as |op opName|}}
+{{#if @first}}
 == {{tag.name}} Overview
 
 [cols="1,2,4",options="header"]
 |===
 | Method | API Path | Description
-{{#each @root.openapi.paths as |path pathName|~}}
-{{#each (filterPathByTag path ../tag.name) as |op opName|}}
+{{/if}}
 {{#validMethod opName}}
 | `{{uppercase opName}}` | link:#{{op.operationId}}[{{{breakAtSlash pathName}}}] | {{op.summary}}
 {{/validMethod}}
-{{~/each}}
-{{~/each}}
+{{#if @last}}
 |===
+{{/if}}
+{{~/each}}
+{{~/each}}
 
 {{#pathParamsByTag @root.openapi.paths tag.name 'path'}}
 === Common Path Parameters
@@ -55,10 +59,12 @@ endif::combined-doc[]
 |===
 {{/pathParamsByTag}}
 
-== {{tag.name}} Details
-
 {{#each @root.openapi.paths as |path pathName|~}}
 {{#each (filterPathByTag path ../tag.name) as |op opName|}}
+
+{{#if @first}}
+== {{tag.name}} Details
+{{/if}}
 
 {{#validMethod opName}}
 [[{{op.operationId}}]]
