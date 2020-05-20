@@ -1,9 +1,5 @@
-:leveloffset: +1
-
 {{#unless openapi.__noSchemas}}
 {{#each openapi.components.schemas}}
   {{~>schema schema=. schemaName=@key renderSlug=true~}}
 {{/each}}
 {{/unless}}
-
-:leveloffset: -1
