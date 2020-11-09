@@ -4,7 +4,11 @@ module.exports = (Handlebars, _) =>{
    * Tagify a string.
    */
   Handlebars.registerHelper('tagify', (str) => {
-    return str.replace(/\s+/g,'_');
+    if (str) {
+      return str.replace(/\s+/g,'_');
+    } else {
+      return "";
+    }
   });
 
 }
