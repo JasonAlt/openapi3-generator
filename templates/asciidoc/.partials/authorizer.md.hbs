@@ -7,6 +7,9 @@
 {{#equal authorizer 'PublicAuthorizer'}}
 * PublicAuthorizer
 {{/equal}}
+{{#equal authorizer 'SubscriptionManagerAuthorizer'}}
+* SubscriptionManagerAuthorizer
+{{/equal}}
 {{#if authorizer.CollectionAclAuthorizer}}
 * CollectionACLAuthorizer: [
 {{#each authorizer.CollectionAclAuthorizer as |name|}}
@@ -16,6 +19,11 @@
 {{#if authorizer.StorageGatewayAuthorizer}}
 * StorageGatewayAuthorizer [
 {{#each authorizer.StorageGatewayAuthorizer as |name|}}`{{name}}`{{#unless @last}}, {{/unless}}{{/each}}
+]
+{{/if}}
+{{#if authorizer.UserCredentialOwnerAuthorizer}}
+* UserCredentialOwnerAuthorizer [
+{{#each authorizer.UserCredentialOwnerAuthorizer as |name|}}`{{name}}`{{#unless @last}}, {{/unless}}{{/each}}
 ]
 {{/if}}
 {{/each}}
